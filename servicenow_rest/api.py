@@ -145,5 +145,5 @@ class Client(object):
         return self._request('PUT', None, payload)
 
     def delete(self, sysid):
-        return self._request('DELETE', sysid)
+        return self._request('DELETE', None, None, sysid)
 
