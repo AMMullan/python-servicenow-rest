@@ -1,7 +1,7 @@
 # servicenow-rest
-Servicenow REST API client
+
 The REST API is active by default in all instances, starting with the Eureka release.
-servicenow-rest is compatible with both Python 2 and 3.
+Compatible with both Python 2 and 3.
 
 For more info:
 http://wiki.servicenow.com/index.php?title=REST_API
