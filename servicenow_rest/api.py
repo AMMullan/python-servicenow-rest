@@ -74,10 +74,10 @@ class Client(object):
 
     def _format_query(self, query={}, query_on={}):
         """
-        The dict-to-string conversion used here was inspired by: https://github.com/locaweb/python-servicenow_rest
+        The dict-to-string conversion used here was inspired by: https://github.com/locaweb/python-servicenow
         :param query: query dict
         :param query_on: query-on dict
-        :return: servicenow_rest query string
+        :return: servicenow query string
         """
         try:
             items = query.iteritems()  # Python 2
