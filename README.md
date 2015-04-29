@@ -8,6 +8,12 @@ For more info:
 http://wiki.servicenow.com/index.php?title=REST_API
 
 
+#### Installing
+```
+$ pip install servicenow_rest
+```
+
+
 #### Example usage:
 ```python
 import servicenow_rest.api as sn
