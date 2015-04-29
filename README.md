@@ -23,9 +23,7 @@ s.table = 'incident'
 try:
     res = s.get({'number': 'INC0012345'})
     print(res)
-except sn.UnexpectedResponse as e:
-    print(e)
-except sn.InvalidUsage as e:
+except sn.UnexpectedResponse as e:  # Unexpected server response (i.e. authentication error)
     print(e)
 ```
 
