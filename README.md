@@ -1,4 +1,4 @@
-# servicenow-rest
+# python-servicenow-rest
 
 The REST API is active by default in all instances, starting with the Eureka release.
 
