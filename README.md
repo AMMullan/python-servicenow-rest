@@ -4,7 +4,8 @@ The REST API is active by default in all instances, starting with the Eureka rel
 
 Compatible with both Python 2 and 3. Tested with 2.7 and 3.4.
 
-For more info:
+For more info, see:
+
 http://wiki.servicenow.com/index.php?title=REST_API
 
 
