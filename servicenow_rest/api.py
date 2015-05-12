@@ -66,7 +66,7 @@ class Client(object):
         result = request.json()
 
         if 'error' in result:
-            raise UnexpectedResponse("ServiceNow responded: %s" % (result['error']['message']))
+            raise UnexpectedResponse("ServiceNow responded (%i): %s" % (request.status_code, result['error']['message']))
         else:
             return result['result']
 
