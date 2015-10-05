@@ -57,12 +57,19 @@ class Client(object):
 
         return url_str
 
-    def _handle_response(self, request):
+    def _handle_response(self, request, method):
         """
         Checks for errors in the server response. Returns serialized server response on success.
         :param request: request object
+        :param method: HTTP method
         :return: ServiceNow response dict
         """
+        if method == 'DELETE':
+            if request.status_code != 204:
+                raise UnexpectedResponse("Unexpected HTTP response code. Expected: 204, got %d" % request.status_code)
+            else:
+                return True
+
         result = request.json()
 
         if 'error' in result:
@@ -98,14 +105,14 @@ class Client(object):
         Request wrapper. Makes sure table property is set and performs the appropriate method call.
         :param method: http verb str
         :param query: query dict
-        :param payload: query payload for updates and inserts
+        :param payload: query payload for inserts
         :return: server response
         """
         if not self.table:
             raise InvalidUsage("You must specify a table to query ServiceNow")
 
         if sysid:
-            url = "%s/%s" % (self.url, self.sysid)
+            url = "%s/%s" % (self.url, sysid)
         else:
             url = self.url
 
@@ -115,13 +122,12 @@ class Client(object):
                 params={'sysparm_query': self._format_query(query)}
             )
         elif method == 'POST':
-            request = self._session.put(
+            request = self._session.post(
                 url,
-                params={'sysparm_query': self._format_query(query)},
                 data=json.dumps(payload)
             )
         elif method == 'PUT':
-            request = self._session.post(
+            request = self._session.put(
                 url,
                 data=json.dumps(payload)
             )
@@ -131,16 +137,16 @@ class Client(object):
                 data=json.dumps(payload)
             )
 
-        return self._handle_response(request)
+        return self._handle_response(request, method)
 
     def get(self, query):
         return self._request('GET', query)
 
-    def update(self, query, payload, sysid):
-        return self._request('POST', query, payload, sysid)
+    def update(self, payload, sysid):
+        return self._request('PUT', None, payload, sysid)
 
     def insert(self, payload):
-        return self._request('PUT', None, payload)
+        return self._request('POST', None, payload)
 
     def delete(self, sysid):
         return self._request('DELETE', None, None, sysid)
