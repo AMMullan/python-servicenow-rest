@@ -6,7 +6,7 @@ except ImportError:
 setup(
     name='servicenow_rest',
     packages=['servicenow_rest'],
-    version='0.1',
+    version='0.1.1',
     description='ServiceNow REST API Client',
     install_requires=['requests'],
     author='Robert Wikman',
