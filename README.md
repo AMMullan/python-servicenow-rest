@@ -15,16 +15,52 @@ $ pip install servicenow_rest
 ```
 
 
-#### Example usage:
+#### Usage
+
+###### Connect
+
 ```python
 import servicenow_rest.api as sn
 
 s = sn.Client('instance_name', 'user_name', 'password')
-s.table = 'incident'
-try:
-    res = s.get({'number': 'INC0012345'})
-    print(res)
-except sn.UnexpectedResponse as e:  # Unexpected server response (i.e. authentication error)
-    print(e)
 ```
+
+###### Set table
+```python
+s.table = 'incident'
+```
+
+###### Get
+
+```python
+res = s.get({'number': 'INC0012345'})
+print(res)
+```
+
+
+###### Create
+
+```python
+res = s.insert({'short_description': 'test', 'description': 'test'})
+print(res['sys_id'])
+```
+
+###### Update
+
+```python
+res = s.get({'number': 'INC0012345'})
+sys_id = res[0]['sys_id']
+s.update({'comments': 'test', 'description': 'test'}, sys_id)
+```
+
+###### Delete
+
+```python
+res = s.get({'number': 'INC0012345'})
+sys_id = res[0]['sys_id']
+s.delete(sys_id)
+```
+
+
+
 
