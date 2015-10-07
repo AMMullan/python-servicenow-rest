@@ -116,9 +116,14 @@ class Client(object):
             url = self.url
 
         if method == 'GET':
+            if type(query) is dict:
+                query = self._format_query(query)
+            elif type(query) is not str:
+                raise InvalidUsage("You must pass a query using either a dictionary or string (for advanced queries)")
+
             request = self._session.get(
                 url,
-                params={'sysparm_query': self._format_query(query)}
+                params={'sysparm_query': query}
             )
         elif method == 'POST':
             request = self._session.post(
