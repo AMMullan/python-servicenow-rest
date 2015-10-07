@@ -34,6 +34,9 @@ class Client(object):
         ## Request properties
         self.table = None
 
+        ## Return properties
+        self.return_code = None
+
     def _create_session(self):
         """
         Creates and returns a new session object with the user/pw combination passed to the constructor
@@ -74,6 +77,7 @@ class Client(object):
         if 'error' in result:
             raise UnexpectedResponse("ServiceNow responded (%i): %s" % (request.status_code, result['error']['message']))
         else:
+            self.return_code = request.status_code
             return result['result']
 
     def _format_query(self, query={}, query_on={}):
