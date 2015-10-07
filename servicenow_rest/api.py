@@ -33,7 +33,6 @@ class Client(object):
 
         ## Request properties
         self.table = None
-        self.sysid = None
 
     def _create_session(self):
         """
