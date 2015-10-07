@@ -120,9 +120,9 @@ class Client(object):
             url = self.url
 
         if method == 'GET':
-            if type(query) is dict:
+            if isinstance(query, dict):
                 query = self._format_query(query)
-            elif type(query) is not str:
+            elif not isinstance(query, str):
                 raise InvalidUsage("You must pass a query using either a dictionary or string (for advanced queries)")
 
             request = self._session.get(
